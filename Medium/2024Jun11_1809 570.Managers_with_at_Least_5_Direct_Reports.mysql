@@ -1,0 +1,10 @@
+select
+    outside.name
+from
+    Employee outside
+    join Employee inside on outside.id = inside.managerId
+group by
+    inside.managerId
+having
+    5 <= count(*)
+;

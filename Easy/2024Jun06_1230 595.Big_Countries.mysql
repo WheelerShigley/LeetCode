@@ -1,0 +1,10 @@
+select
+    name,
+    population,
+    area
+from
+    World
+where
+       3000000 /*km^2*/     <= area
+    or 25000000 /*persons*/ <= population
+;

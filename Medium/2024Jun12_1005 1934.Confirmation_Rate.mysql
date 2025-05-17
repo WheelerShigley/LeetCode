@@ -1,0 +1,14 @@
+select
+    Signups.user_id,
+    round(
+        avg(
+            if(Confirmations.action = 'confirmed', 1, 0)
+        ),
+        2
+    ) "confirmation_rate"
+from
+    Signups
+    left join Confirmations using(user_id)
+group by
+    Signups.user_id
+;

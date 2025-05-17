@@ -1,0 +1,17 @@
+select
+    starter.machine_id,
+    round(
+        avg(ender.timestamp - starter.timestamp),
+        3
+    ) "processing_time"
+from
+    Activity starter,
+    Activity ender
+where
+        starter.machine_id = ender.machine_id
+
+    and starter.activity_type = 'start'
+    and ender.activity_type = 'end'
+group by
+    starter.machine_id
+;

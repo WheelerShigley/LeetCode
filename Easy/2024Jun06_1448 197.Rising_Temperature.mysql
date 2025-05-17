@@ -1,0 +1,8 @@
+select
+    outside.id
+from
+    Weather outside
+    join Weather inside
+        on inside.temperature < outside.temperature
+        and datediff(outside.recordDate, inside.recordDate) = 1
+;

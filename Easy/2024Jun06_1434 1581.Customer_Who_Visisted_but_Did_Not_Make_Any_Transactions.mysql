@@ -1,0 +1,28 @@
+/*select
+    Visits.customer_id,
+    count(Visits.visit_id) "count_no_trans"
+from
+    Visits
+    left join Transactions using (visit_id)
+where
+    Transactions.transaction_id is null
+group by
+    Visits.customer_id
+;*/
+
+with non_trans(customer_id,count_no_trans) as (
+    select
+        Visits.customer_id,
+        count(Visits.customer_id) - count(Transactions.transaction_id)
+    from
+        Visits
+        left join Transactions using (visit_id)
+    group by
+        Visits.customer_id
+) select
+    *
+from
+    non_trans
+where
+    0 < count_no_trans
+;
